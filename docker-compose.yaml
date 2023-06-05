@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  db_nest_chat:
+    image: postgres:15.3-alpine
+    restart: always
+    container_name: db_nest_chat
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
