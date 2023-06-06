@@ -4,6 +4,7 @@ import { AppService } from './app.service';
 import { AppGateway } from './app.gateway';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { ConfigModule, ConfigService } from '@nestjs/config';
+import { Chat } from './chat.entity';
 
 @Module({
   imports: [
@@ -19,10 +20,12 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
         username: configService.get('DB_USERNAME'),
         password: configService.get('DB_PASSWORD'),
         database: configService.get('DB_NAME'),
-        entities: [],
+        entities: [Chat],
+        synchronize: true,
       }),
       inject: [ConfigService],
     }),
+    TypeOrmModule.forFeature([Chat]),
   ],
   controllers: [AppController],
   providers: [AppService, AppGateway],
